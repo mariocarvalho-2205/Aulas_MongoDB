@@ -1,0 +1,3 @@
+{"_id":{"$oid":"669989f51f339b7f89c4e49b"},"nome":"joao"}
+{"_id":{"$oid":"66998a081f339b7f89c4e49c"},"nome":"Adilma","idade":"50"}
+{"_id":{"$oid":"66998a211f339b7f89c4e49d"},"nome":"Mario","idade":"49","Profissao":"Analista"}

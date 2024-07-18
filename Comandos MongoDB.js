@@ -35,12 +35,31 @@
 * db.dropDatabase()
 
 ? mongoimport - importa database json
+* é preciso estar na pasta do projeto
 * comando -d = database / -c = collection 
-* mongoimport nome_do_arquivo -d nome_da_collection -c books
+* mongoimport nome_do_arquivo -d nome_d0_banco -c nome_da_collection
 
 ? mongoexport - exporta database json
 * comando -c collection / -d database / -o nome_arquivo.json
-* mongoexport -c nome_collection -d nome_do_banco
+* mongoexport -c nome_collection -d nome_do_banco -o nome_do_novo_arquivo
+
+? mongodump - para exportar muitas collections
+* mongodump -d <banco> -o <diretorio> // no diretorio serao criadas as pastas com as collections
+
+? mongorestore - importa o diretorio mantendo a mesma estrutura de pastas
+* mongorestore -d <banco> 
+
+? mongostat - checa informações como quantidade de consultas, consumo de redes
+? e outros dados
+* mongostat
+
+? remover varios bancos ao  mesmo tempo preservando os bancos admim config e local
+* Mongo().getDBNames().forEach(function(db) {
+    if (['admin', 'config', 'local'].indexOf(db)<0) {
+        Mongo().getDB(db).dropDatabase();
+    }
+});
+
 
 
 */
