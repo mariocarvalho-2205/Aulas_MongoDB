@@ -6,6 +6,8 @@
 * use nome_do_banco - seleciona o banco de dados
 ? insertOne - Inserir dados
 * db.nome_collection.insertOne({chave: "valor"}) - insere um documento e cria collection
+? insertMany([{chave: "valor"}, {chave: "valor"}]) - insere varios dados ao mesmo tempo
+
 
 ? find - Buscar dados
 * db.nome_collection.find() - retorna todos os dados da coleção
