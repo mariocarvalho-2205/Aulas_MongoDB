@@ -6,8 +6,20 @@
 * use nome_do_banco - seleciona o banco de dados
 ? insertOne - Inserir dados
 * db.nome_collection.insertOne({chave: "valor"}) - insere um documento e cria collection
-? insertMany([{chave: "valor"}, {chave: "valor"}]) - insere varios dados ao mesmo tempo
 
+mudando o id
+* db.<collection>.insertOne({_id: 1001, produto: "Vassoura"}) //// dessa forma podemos implementar o id de acordo com a necessidade
+
+* insertMany([{chave: "valor"}, {chave: "valor"}]) - insere varios dados ao mesmo tempo
+
+? Metodo insert pode ser usado nas aplicações mais antigas, porem pode ser descontinuado
+unico dado
+* db.<colection>.insert({chave: "valor", chave: "valor"})
+multiplos dados
+* db.<collection>.insert([{chave: "valor", chave: "valor"}, {chave: "valor"}])
+! Metodo Write Concern - para configurar o insertMany
+com essa configuração determinamos um tempo para a inserção de dados
+* db.<collection>.insertMany([{chave: "valor"}, {chave: "valor"}], { w: "majority", wtimeout: 100})
 
 ? find - Buscar dados
 * db.nome_collection.find() - retorna todos os dados da coleção
