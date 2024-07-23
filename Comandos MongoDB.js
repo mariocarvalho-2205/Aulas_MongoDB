@@ -21,14 +21,25 @@ multiplos dados
 com essa configuração determinamos um tempo para a inserção de dados
 * db.<collection>.insertMany([{chave: "valor"}, {chave: "valor"}], { w: "majority", wtimeout: 100})
 
+// find
 ? find - Buscar dados
 * db.nome_collection.find() - retorna todos os dados da coleção
 * db.nome_colection.findOne() - retorna o primeiro dado da coleção
 * db.nome_collection.find({chave: "valor"}) - retorna o dado especifico  //! OBS: a chave e o valor precisa estar exatamente como foram criados
-* 
+? find({chave: valor}) - Retorna dado especifico de acordo com o valor da chave e valor
+* db.<collection>.find({chave: 'valor'})
+? Operador in - utilizado para pesquisar mais de uma opção // or
+* db.<collection>.find({chave: {$in: ["valor_1", "valor_2"]}}) //// retorna valores que tenham um dos dois dados
+? Operador e - equivalente ao &&
+* db.<collection>.find({chave: valor, chave: valor}) //// retorna valores que atendam as duas condiçoes
+? Operador $gt - equivalente a maior que
+* db.books.find({pageCount: {$gt: 800}, _id: {$gt: 242}})
+
 ? pretty - retorna os dados com um melhor formato
 * ex: db.nome_collection.insertOne({nome: "joao", idade: 35, hobbies: ["Programar", "Jogar", "Correr", "Ler"], profissao: "Programador", salario: 300000, esta_trabalhando: true})
 * db.collection.find({}).pretty() - organiza os dados exibidos
+* metod it e uma forma de retornar menos dados
+
 
 ? createCollection - Criando collection implicita
 ? essa função criaa uma collectio com campos especificos
