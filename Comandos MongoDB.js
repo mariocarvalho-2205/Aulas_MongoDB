@@ -28,12 +28,25 @@ com essa configuração determinamos um tempo para a inserção de dados
 * db.nome_collection.find({chave: "valor"}) - retorna o dado especifico  //! OBS: a chave e o valor precisa estar exatamente como foram criados
 ? find({chave: valor}) - Retorna dado especifico de acordo com o valor da chave e valor
 * db.<collection>.find({chave: 'valor'})
+// Operadores
 ? Operador in - utilizado para pesquisar mais de uma opção // or
 * db.<collection>.find({chave: {$in: ["valor_1", "valor_2"]}}) //// retorna valores que tenham um dos dois dados
 ? Operador e - equivalente ao &&
 * db.<collection>.find({chave: valor, chave: valor}) //// retorna valores que atendam as duas condiçoes
+! OBS: Operadore maior que e menor que não podem ser usados na mesma consulta
 ? Operador $gt - equivalente a maior que
 * db.books.find({pageCount: {$gt: 800}, _id: {$gt: 242}})
+? Operador $it - equivalente a menor que
+* db.<collection>.find({pageCount: {$lt: 20}})
+? Operador $or - equivalente ao || ou - utilizado para pesquisa em campos diferentes
+* db.<collection>.find({$or: [{chave: valor}, {chave: valor}]})
+? Operador $and e $or - equivalente ao && e ||
+* db.<collection>.find({$and: [{chave: valor}, {chave: valor}]})
+? Operador $and e $or na mesma consulta
+* db.<collection>.find({$or: [{chave: valor}, {chave: valor}], $and: [{chave: valor}, {chave: valor}]})
+
+
+
 
 ? pretty - retorna os dados com um melhor formato
 * ex: db.nome_collection.insertOne({nome: "joao", idade: 35, hobbies: ["Programar", "Jogar", "Correr", "Ler"], profissao: "Programador", salario: 300000, esta_trabalhando: true})
