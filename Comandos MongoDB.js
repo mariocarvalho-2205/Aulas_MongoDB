@@ -46,6 +46,8 @@ com essa configuração determinamos um tempo para a inserção de dados
 * db.<collection>.find({$or: [{chave: valor}, {chave: valor}], $and: [{chave: valor}, {chave: valor}]})
 
 
+? count - exibe a quantidade de registros com a caracteristica passada
+db.<collection>.find({ pageCount: { $gt: 500} }).count()
 
 
 ? pretty - retorna os dados com um melhor formato
@@ -98,7 +100,11 @@ com essa configuração determinamos um tempo para a inserção de dados
     }
 });
 
-
-
+Atividade 02:
+db.books.find({ categories: "Java"})
+db.books.find({ pageCount: { $lt: 100}})
+db.books.find({ $and: [{ categories: "Microsoft"}, { pageCount: {$gt: 300}}]})
+db.books.find({ categories: "Web Development"}).count()
+db.books.find({ $or: [{ authors: "Bret Updegraff"}, { categories: "Mobile"}]})
 */
 
