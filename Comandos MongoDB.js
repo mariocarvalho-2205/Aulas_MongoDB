@@ -55,6 +55,14 @@ db.<collection>.find({ pageCount: { $gt: 500} }).count()
 * db.collection.find({}).pretty() - organiza os dados exibidos
 * metod it e uma forma de retornar menos dados
 
+//// Atualizar dados - updateOne
+? updateOne()
+// Operador $set:
+* primeiro parametro e o filtro, segundo parametro dado que sera atualizado
+* db.collection.updateOne({chave: valor}, {$set: {chave: valor}})
+Ex: db.books.updateOne({_id: 314}, {$set: {pageCount: 1000}})
+Atividaade:
+    db.books.updateOne({_id: 20}, {$set: {title: "Meu Primeiro UPDADE"}})
 
 ? createCollection - Criando collection implicita
 ? essa função criaa uma collectio com campos especificos
