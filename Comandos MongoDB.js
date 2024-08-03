@@ -28,6 +28,7 @@ com essa configuração determinamos um tempo para a inserção de dados
 * db.nome_collection.find({chave: "valor"}) - retorna o dado especifico  //! OBS: a chave e o valor precisa estar exatamente como foram criados
 ? find({chave: valor}) - Retorna dado especifico de acordo com o valor da chave e valor
 * db.<collection>.find({chave: 'valor'})
+
 // Operadores
 ? Operador in - utilizado para pesquisar mais de uma opção // or
 * db.<collection>.find({chave: {$in: ["valor_1", "valor_2"]}}) //// retorna valores que tenham um dos dois dados
@@ -36,7 +37,7 @@ com essa configuração determinamos um tempo para a inserção de dados
 ! OBS: Operadore maior que e menor que não podem ser usados na mesma consulta
 ? Operador $gt - equivalente a maior que
 * db.books.find({pageCount: {$gt: 800}, _id: {$gt: 242}})
-? Operador $it - equivalente a menor que
+? Operador $lt - equivalente a menor que
 * db.<collection>.find({pageCount: {$lt: 20}})
 ? Operador $or - equivalente ao || ou - utilizado para pesquisa em campos diferentes
 * db.<collection>.find({$or: [{chave: valor}, {chave: valor}]})
@@ -44,7 +45,7 @@ com essa configuração determinamos um tempo para a inserção de dados
 * db.<collection>.find({$and: [{chave: valor}, {chave: valor}]})
 ? Operador $and e $or na mesma consulta
 * db.<collection>.find({$or: [{chave: valor}, {chave: valor}], $and: [{chave: valor}, {chave: valor}]})
-
+? Operador $push - atualiza um item de um array 
 
 ? count - exibe a quantidade de registros com a caracteristica passada
 db.<collection>.find({ pageCount: { $gt: 500} }).count()
@@ -63,6 +64,23 @@ db.<collection>.find({ pageCount: { $gt: 500} }).count()
 Ex: db.books.updateOne({_id: 314}, {$set: {pageCount: 1000}})
 Atividaade:
     db.books.updateOne({_id: 20}, {$set: {title: "Meu Primeiro UPDADE"}})
+
+? updateMany() - atualiza muitos dados ao mesmo tempo
+* db.collection.updateMany({chave: "valor"}, {$set: {chave: "valor"}})
+? replaceOne() - Substitui os dados por outro dado
+* Ex: Será substituido os dados de uma pasta completamente
+* Sintase: db.<collection>.replaceOne({chave: "valor"}, {chave: "valor"})
+//// Atualizar todos os dados 
+? updateMany() - atualiza todos os dados do banco
+* db.<collection>.updateMany({}, {$set: {chave: "Valor"}})
+
+//// Delete / destroy - deletando dados
+? deleteOne()
+* db.<collection>.deleteOne({chave: "valor"})
+? deleteMany()
+* db.<collection>.deleteMany({chave: "valor"})
+? deleteMany({}) - deletando todos os dados de uma collection
+! MUITO CUIDADO COM FILTROS VAZIO EM DELETE
 
 ? createCollection - Criando collection implicita
 ? essa função criaa uma collectio com campos especificos
@@ -114,5 +132,16 @@ db.books.find({ pageCount: { $lt: 100}})
 db.books.find({ $and: [{ categories: "Microsoft"}, { pageCount: {$gt: 300}}]})
 db.books.find({ categories: "Web Development"}).count()
 db.books.find({ $or: [{ authors: "Bret Updegraff"}, { categories: "Mobile"}]})
+
+atividade 03:
+db.books.find({title: "Flex 4 in Action"})
+db.books.updateMany({title: "Flex 4 in Action"}, {$set: {status: "OUT OF STOCK"}})
+db.books.updateMany({pageCount: {$lt: 100}}, {$set: {short_book: true}})
+db.books.find({$and: [{categories: "Java"},{pageCount: {$gt: 500}}]})
+db.books.updateMany({$and: [{categories: "Java"},{pageCount: {$gt: 500}}]}, {$push: {categories: "Many Pages"}})
+
+
 */
+
+
 
