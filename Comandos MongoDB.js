@@ -125,6 +125,36 @@ Atividaade:
         Mongo().getDB(db).dropDatabase();
     }
 });
+! =-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-
+// Tipos de dados
+? - String
+Podemos adicionar o campo em uma variavel, a sistaxe e semelhante ao JS
+const nome = db.collection.findOne({ chave: "valor"})
+? - Array
+Variaveis que armazenam mais de um valor. de preferencia utilizamos valores do mesmo tipo
+Sintaxe
+db.<collection>.insertOne({ chave: ['valor', 'valor']})
+para resgatar os dados individuais adicionamos em uma variavel
+const <nome_variavel> = db.<collection>.findOne()
+Inserindo varios tipos diferentes
+db.<collection>.insertOne({ chave: [ "Mario", 49, "Analista", true]})
+? - Datas
+utilizamos para verificar por exemplo o dia em que o usuario foi criado ou acessou o sistema
+db.dates.insertONe({ nome: "Mario", created_at: new Date()})
+? - Document / objetos semelhante ao JavaScript
+db.documents.insertOne({ nome: "Tonho", desc: { profissao: "Programador", hobbies: ["Estudar", "Ler", "Caminhar"]}})
+! =-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-
+
+
+// =-=--=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-=
+? Verificando tipo de dado
+* typeof variavel ou comando
+typeof variavel
+typeof variavel.chave
+typeof db.collection.findOne({ chave: "valor"})
+typeof db.collection.findOne({ chave: "valor"}).chave
+! das duas formas retornam o mesmo resultado
+
 
 Atividade 02:
 db.books.find({ categories: "Java"})
