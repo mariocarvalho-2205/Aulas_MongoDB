@@ -143,6 +143,14 @@ utilizamos para verificar por exemplo o dia em que o usuario foi criado ou acess
 db.dates.insertONe({ nome: "Mario", created_at: new Date()})
 ? - Document / objetos semelhante ao JavaScript
 db.documents.insertOne({ nome: "Tonho", desc: { profissao: "Programador", hobbies: ["Estudar", "Ler", "Caminhar"]}})
+? Boolean
+db.<collection>.insertOne({chave: valor, chave: true ou false})
+? Numbers
+* Os numeros sao todos considerados double, e para passarmos um inteiro
+* É necessário informa que será inteiro através do metodo NumberInt ("5")
+! Um adeno importante é que seja especificado se o numero e inteiro para nao
+! ocupar muito espaço na memoria
+db.<collecion>.insertOne({ double: 12.5, outro_double: 50, inteiro: NumberInt("5")})
 ! =-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-
 
 
@@ -154,16 +162,23 @@ typeof variavel.chave
 typeof db.collection.findOne({ chave: "valor"})
 typeof db.collection.findOne({ chave: "valor"}).chave
 ! das duas formas retornam o mesmo resultado
+// =-=--=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-=
+
+// Operadores Query (Select)
 
 
-Atividade 02:
+
+
+// =-=--=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-=
+// Atividades
+* Atividade 02:
 db.books.find({ categories: "Java"})
 db.books.find({ pageCount: { $lt: 100}})
 db.books.find({ $and: [{ categories: "Microsoft"}, { pageCount: {$gt: 300}}]})
 db.books.find({ categories: "Web Development"}).count()
 db.books.find({ $or: [{ authors: "Bret Updegraff"}, { categories: "Mobile"}]})
 
-atividade 03:
+* Atividade 03:
 db.books.find({title: "Flex 4 in Action"})
 db.books.updateMany({title: "Flex 4 in Action"}, {$set: {status: "OUT OF STOCK"}})
 db.books.updateMany({pageCount: {$lt: 100}}, {$set: {short_book: true}})
