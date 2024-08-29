@@ -2,6 +2,7 @@
 // Comandos Mongo
 ? show - exibe os bancos existentes
 * show dbs - mostra os bancos de dados
+* show collections - exibe todas as coleções no banco de dados
 
 * use nome_do_banco - seleciona o banco de dados
 ? insertOne - Inserir dados
@@ -29,22 +30,51 @@ com essa configuração determinamos um tempo para a inserção de dados
 ? find({chave: valor}) - Retorna dado especifico de acordo com o valor da chave e valor
 * db.<collection>.find({chave: 'valor'})
 
-// Operadores
+// =-=--=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-=
+
+// Operadores Query (Select)
+
+? Operador de igualdade - $eq
+Sintaxe - db.<colection>.find({ chave: {$eq: valor}})
+* Reduzido - o operador de igualdade pode ser realizado sem o operador
+Sintaxe - db.<colection>.find({ chave: valor})
+
 ? Operador in - utilizado para pesquisar mais de uma opção // or
-* db.<collection>.find({chave: {$in: ["valor_1", "valor_2"]}}) //// retorna valores que tenham um dos dois dados
+//// retorna valores que tenham um dos dois dados
+Sintaxe - db.<collection>.find({chave: {$in: ["valor_1", "valor_2"]}}) 
+
 ? Operador e - equivalente ao &&
-* db.<collection>.find({chave: valor, chave: valor}) //// retorna valores que atendam as duas condiçoes
+//// retorna valores que atendam as duas condiçoes
+Sintaxe - db.<collection>.find({chave: valor, chave: valor}) 
+
 ! OBS: Operadore maior que e menor que não podem ser usados na mesma consulta
 ? Operador $gt - equivalente a maior que
-* db.books.find({pageCount: {$gt: 800}, _id: {$gt: 242}})
+// Retorna o valor maior que o valor passado
+Sintaxe - db.books.find({pageCount: {$gt: 800}, _id: {$gt: 242}})
+
+? Operador $gte - maior ou igual a
+// Retorna o valor maior ou igual ao valor passado
+// utilizando o findOne ele retorna a primeira ocorrencia que atenda ao parametro passado
+Sintaxe - db.<collection>.findOne({ chave: {$gte: valor}})
+
 ? Operador $lt - equivalente a menor que
-* db.<collection>.find({pageCount: {$lt: 20}})
+Sintaxe - db.<collection>.find({pageCount: {$lt: 20}})
+? Operador $lte - menor ou igual a
+Sintaxe - db.<collection>.find({pageCount: {$lte: 20}})
+
+? Operador $and - equivalente ao && e ||
+// retorna se atender os dois parametros passados
+// pode ser utilizado com sintaxe reduzida
+Sintaxe - db.<collection>.find({$and: [{chave: valor}, {chave: valor}]})
+Sintaxe Reduzida - db.<collection>.find({chave: valor, chave: valor})
+
 ? Operador $or - equivalente ao || ou - utilizado para pesquisa em campos diferentes
+// retorna um ou outro valor passado como parametro
 * db.<collection>.find({$or: [{chave: valor}, {chave: valor}]})
-? Operador $and e $or - equivalente ao && e ||
-* db.<collection>.find({$and: [{chave: valor}, {chave: valor}]})
+
 ? Operador $and e $or na mesma consulta
 * db.<collection>.find({$or: [{chave: valor}, {chave: valor}], $and: [{chave: valor}, {chave: valor}]})
+
 ? Operador $push - atualiza um item de um array 
 
 ? count - exibe a quantidade de registros com a caracteristica passada
@@ -92,7 +122,6 @@ Atividaade:
         ! Essa forma usa o conceito de Fila - sai o mais aintigo e entra o mais novo
     * db.createCollection("nome da coleção") - cria a coleção simples
 
-? show collections - exibe todas as coleções no banco de dados
 
 ? drop - remove collection  // ! Esse comando tambem remove os dados que estiverem na collection
 * db.nome_collectio.drop()
@@ -165,7 +194,10 @@ typeof db.collection.findOne({ chave: "valor"}).chave
 // =-=--=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-=
 
 // Operadores Query (Select)
-
+? Operador de igualdade - $eq
+Sintaxe - db.<colection>.findOne({ chave: {$eq: valor}})
+* o operador de igualdade pode ser realizado sem o operador
+Sintaxe - db.<colection>.findOne({ chave: valor})
 
 
 
