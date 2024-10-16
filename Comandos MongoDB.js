@@ -34,13 +34,20 @@ com essa configuração determinamos um tempo para a inserção de dados
 
 // Operadores Query (Select)
 
-? Operador de igualdade - $eq
+? Operador $eq - utilizado para retornar os valores iguais
 Sintaxe - db.<colection>.find({ chave: {$eq: valor}})
 * Reduzido - o operador de igualdade pode ser realizado sem o operador
 Sintaxe - db.<colection>.find({ chave: valor})
 
+? Operador $ne - utilizado para retornar os valores diferentes 
+Sintaxe - db.<colection>.find({ chave: {$eq: valor}})
+
+? Operador $exists - retorna apenas os dados que possuem determinado campo
+Sintaxe - db.<collection>.find({ chave: {$exists: true}}) 
+* Retorna apenas os registros que possuam a chave
+
 ? Operador in - utilizado para pesquisar mais de uma opção // or
-//// retorna valores que tenham um dos dois dados
+//// retorna valores que tenham um dos dois dados em um array
 Sintaxe - db.<collection>.find({chave: {$in: ["valor_1", "valor_2"]}}) 
 
 ? Operador e - equivalente ao &&
