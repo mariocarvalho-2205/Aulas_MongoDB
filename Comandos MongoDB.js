@@ -93,6 +93,23 @@ db.<collection>.find({ pageCount: { $gt: 500} }).count()
 * db.collection.find({}).pretty() - organiza os dados exibidos
 * metod it e uma forma de retornar menos dados
 
+? Operador $text - para buscar texto passado no parametro
+* faz uma busca sobre o texto do campo informado no indice
+* É preciso criar um indice 
+* Sintaxe:
+db.<collection>.createIndex({ name: "text" })  // cria o index
+db.<collection>.find( { $text: { $search: "valor"} } )
+* Remover o índice existente e criar um novo:
+* Se o índice existente não for necessário, você pode removê-lo e criar um novo índice para shortDescription.
+db.books.dropIndex("name_text");
+db.books.createIndex({ shortDescription: "text" });
+
+* 2. Adicionar múltiplos campos ao índice de texto:
+* Caso você queira indexar tanto name quanto shortDescription, você pode criar um índice de texto que inclua ambos os campos.
+db.books.createIndex({ name: "text", shortDescription: "text" });
+
+
+
 //// Atualizar dados - updateOne
 ? updateOne()
 // Operador $set:
