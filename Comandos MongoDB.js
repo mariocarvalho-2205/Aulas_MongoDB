@@ -223,9 +223,128 @@ Sintaxe - db.<colection>.findOne({ chave: {$eq: valor}})
 * o operador de igualdade pode ser realizado sem o operador
 Sintaxe - db.<colection>.findOne({ chave: valor})
 
+> Relacionamentos 
+* embedded documents - É uma forma simples de fazer relacinamento entre docs
+* Ele tem um limite de 16mb
+? para acessar os dados colocamos os valores em uma variavel
+Sintaxe - db.embedded.insertOne({
+    nome: "Adilma",
+    idade: 50,
+    endereco: {
+        rua: "Rua das flores",
+        numero: 102,
+        complemento: "Casa"
+    }
+})
+* Sintaxe com multiplos dados
+db.embedded.insertOne({
+    nome: "Ady Matos",
+    idade: 50,
+    endereco: {
+        trabalho: {
+            rua: "Rua das arvores",
+            numero: 1000,
+            complemento: "Escritório"
+        },
+        casa: {
+            rua: "Rua das flores",
+            numero: 102,
+            complemento: "Casa"
+        }
+        
+    }
+})
 
 
-// =-=--=-=-=-=-=-=-=-=-=-=-=-=-=--==-=-=-=-=-=-=
+* One to One - É quando um registro possui uma ligação unica com outro, 
+* e o inverso tambem
+* para fazer o relacionamento utilizamos um registro para fazer a associação
+* nesse caso iremos utilizar o id
+Sintaxe:
+1 - collection
+db.pessoas.insertOne({
+    nome: "Jose",
+    idade: 60,
+    profissao: "programador"
+})
+2 - collection
+db.endereco.insertOne({
+    rua: "Rua das flores",
+    numero: 1414,
+    complemento: "casa",
+    pessoa_id: pJose._id
+})
+para acessar a pessoa do endereco, atribuimos o endereco a uma variavel
+const endJose = db.endereco.findOne({ pessoa_id: pJose._id})
+
+* One to Many - é quando um registro pode possuir mais vinculos com outra collection
+* porem o inverso náo é possivél
+* Ex: Um usuario pode fazer varias compras, mas uma compra pertence apenas a um usuario
+? 1 - collection pessoa - definimos uma varival para esse dado
+db.pessoa.insertOne({
+    nome: "Gustavo",
+    idade: 29,
+    profissao: "Gerente"
+})
+? 2 - criamos as variaves com a pessoa e com o id
+const gustavo = db.pessoas.findOne({nome: "Gustavo"})
+const gustavoId = gustavo._id
+* para atribuirmos um valor direto a uma variavel podemos utilizar assim
+const gustavoId2 = db.pessoas.findOne({ nome: Gustavo })._id
+
+? 3 - criamos a collection compras
+db.compras.insertMany([
+    { produtos: ["Livro", "Lapis", "Borracha"], pessoa_id: gustavoId},
+    { produtos: ["Papel", "Caneta"], pessoa_id: gustavoId},
+    { produtos: ["Placa de video", "Computador", "Mouse", "Teclado"], pessoa_id: gustavoId},
+    { produtos: ["Caneca", "Lapiseira", "Giz"], pessoa_id: joseId},
+    { produtos: ["Celular"], pessoa_id: joseId},
+])
+? 4 - localizando as compras de determinado usuario
+db.compras.find({pessoa_id: gustavoId})
+
+* Many to Many - acontece quando os registros das duas collections possuem mais de 
+* uma relação entre si
+Ex: Temos alunso e cursos, um curso pode ter varios alunos matriculados,
+e um aluno pode estar fazendo varios cursos
+? 1 - tabela cursos
+db.cursos.insertMany([
+    {curso: "Javascript"},
+    {curso: "NodeJS"},
+    {curso: "React"},
+    {curso: "MongoDB"}
+])
+? 2 - tabela alunos vamos usar tabela pessoas
+* atribuimos os alunos a variaveis 
+? 3 - atribuimos os cursos a variaveis tambem
+? 4 - Criamos uma collection de relacionamento das duas collections
+* noralmente utilizamos o nome das duas collections
+Sintaxe:
+db.curso_pessoa.insertMany([
+    {curso_id: react._id, pessoa_id: gustavofull._id},
+    {curso_id: react._id, pessoa_id: josefull._id},
+    {curso_id: js._id, pessoa_id: josefull._id}
+])
+
+? 5 - recebendo os dados dos alunos que cursam js
+* criamos um array vazio
+const idsalunos = []
+* preenchemos com os ids dos alunos atraves de forEach()
+db.curso_pessoa.find({ curso_id: react._id }).forEach(function(aluno) {
+    idsalunos.push(aluno.pessoa_id)
+})
+
+fazemos uma consulta utilizando o operador $in
+db.pessoas.find({ _id: { $in: ids_alunos}})
+
+! para adicionar novos alunos, repetimos o passo 4 e o 5 criando um novo array
+
+
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Atividades
 * Atividade 02:
 db.books.find({ categories: "Java"})
@@ -243,6 +362,3 @@ db.books.updateMany({$and: [{categories: "Java"},{pageCount: {$gt: 500}}]}, {$pu
 
 
 */
-
-
-
