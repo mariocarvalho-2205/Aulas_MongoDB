@@ -4,6 +4,10 @@
 * show dbs - mostra os bancos de dados
 * show collections - exibe todas as coleções no banco de dados
 
+// verificando status do mongodb
+
+
+// criação de collection
 * use nome_do_banco - seleciona o banco de dados
 ? insertOne - Inserir dados
 * db.nome_collection.insertOne({chave: "valor"}) - insere um documento e cria collection
@@ -18,9 +22,14 @@ unico dado
 * db.<colection>.insert({chave: "valor", chave: "valor"})
 multiplos dados
 * db.<collection>.insert([{chave: "valor", chave: "valor"}, {chave: "valor"}])
+
+? mudando o id do document
+podemos modificar o id na criação do document utilizando nosso proprio id
+
 ! Metodo Write Concern - para configurar o insertMany
 com essa configuração determinamos um tempo para a inserção de dados
 * db.<collection>.insertMany([{chave: "valor"}, {chave: "valor"}], { w: "majority", wtimeout: 100})
+
 
 // find
 ? find - Buscar dados
@@ -146,27 +155,35 @@ Atividaade:
         ! Essa forma usa o conceito de Fila - sai o mais aintigo e entra o mais novo
     * db.createCollection("nome da coleção") - cria a coleção simples
 
-
+// removendo collections
 ? drop - remove collection  // ! Esse comando tambem remove os dados que estiverem na collection
 * db.nome_collectio.drop()
 
+// removenco banco
 ? dropDatabase() - Apaga o banco de dados e todas as suas collections
 * db.dropDatabase()
 
+// importando banco de dados em JSON
 ? mongoimport - importa database json
 * é preciso estar na pasta do projeto
 * comando -d = database / -c = collection 
-* mongoimport nome_do_arquivo -d nome_d0_banco -c nome_da_collection
+* mongoimport nome_do_arquivo.json -d nome_d0_banco -c nome_da_collection
 
+// exportando banco json
 ? mongoexport - exporta database json
-* comando -c collection / -d database / -o nome_arquivo.json
-* mongoexport -c nome_collection -d nome_do_banco -o nome_do_novo_arquivo
+* comando -c <collection> / -d <database> / -o <output.json>
+* mongoexport -c nome_collection -d nome_do_banco -o nome_do_novo_arquivo.json
 
+// exportar muitas collections
 ? mongodump - para exportar muitas collections
-* mongodump -d <banco> -o <diretorio> // no diretorio serao criadas as pastas com as collections
+* mongodump -d <banco> -o <diretorio> 
+// onde o -o  criara uma pasta e os arquivos 
+// bson das collections junto com os arquivos metadata
+* mongodump -d nome_banco -o nome_diretorio
 
+// importa o banco mantendo a estrutura de pastas
 ? mongorestore - importa o diretorio mantendo a mesma estrutura de pastas
-* mongorestore -d <banco> 
+* mongorestore <diretorio> 
 
 ? mongostat - checa informações como quantidade de consultas, consumo de redes
 ? e outros dados
